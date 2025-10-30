@@ -1,4 +1,3 @@
-
 export interface Seat {
   id: string;
   number: string;
@@ -16,6 +15,14 @@ export interface Bus {
   price: number;
   rating: number;
   seats: Seat[];
+  amenities: {
+    wifi: boolean;
+    ac: boolean;
+    power: boolean;
+  };
+  stops: string[];
+  status: 'On Route' | 'Parked' | 'Maintenance';
+  occupancy: number; // as a percentage, e.g., 85 for 85%
 }
 
 export interface Booking {

@@ -1,5 +1,4 @@
-
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Header } from './components/Header';
 import { SearchSection } from './components/SearchSection';
 import { Dashboard } from './components/Dashboard';
@@ -10,12 +9,26 @@ import { MOCK_BUSES } from './constants';
 import type { Bus, Booking, SearchParams, Seat } from './types';
 import { View } from './types';
 
+const BOOKINGS_STORAGE_KEY = 'orrange-bookings';
+
 export default function App() {
   const [currentView, setCurrentView] = useState<View>(View.SEARCH);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [searchResults, setSearchResults] = useState<Bus[]>([]);
   const [selectedBus, setSelectedBus] = useState<Bus | null>(null);
   const [selectedSeats, setSelectedSeats] = useState<Seat[]>([]);
+
+  useEffect(() => {
+    // Load bookings from local storage on initial render
+    try {
+      const storedBookings = localStorage.getItem(BOOKINGS_STORAGE_KEY);
+      if (storedBookings) {
+        setBookings(JSON.parse(storedBookings));
+      }
+    } catch (error) {
+      console.error("Failed to load bookings from local storage", error);
+    }
+  }, []);
 
   const handleSearch = useCallback((params: SearchParams) => {
     // Simulate API call
@@ -36,7 +49,6 @@ export default function App() {
 
     const newBooking: Booking = {
       id: `OR-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
-      // FIX: Correctly assign the selected bus to the new booking.
       bus: selectedBus,
       seats: selectedSeats,
       passengerName,
@@ -45,7 +57,15 @@ export default function App() {
       status: 'Confirmed',
     };
 
-    setBookings(prev => [...prev, newBooking]);
+    const updatedBookings = [...bookings, newBooking];
+    setBookings(updatedBookings);
+    
+    try {
+      // Save updated bookings to local storage
+      localStorage.setItem(BOOKINGS_STORAGE_KEY, JSON.stringify(updatedBookings));
+    } catch (error) {
+      console.error("Failed to save bookings to local storage", error);
+    }
     
     // Update bus availability in mock data
     const busIndex = MOCK_BUSES.findIndex(b => b.id === selectedBus.id);
@@ -60,7 +80,7 @@ export default function App() {
     setSelectedSeats([]);
     alert(`Booking successful! Your booking ID is ${newBooking.id}`);
     setCurrentView(View.BOOKINGS);
-  }, [selectedBus, selectedSeats]);
+  }, [selectedBus, selectedSeats, bookings]);
 
   const renderContent = () => {
     switch (currentView) {

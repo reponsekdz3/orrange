@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import type { Seat } from '../types';
 import { ArmchairIcon } from './icons';
@@ -34,10 +33,8 @@ export const SeatLayout: React.FC<SeatLayoutProps> = ({ seats, onBookNow }) => {
     return 'text-gray-600 hover:text-orange-400 cursor-pointer';
   };
 
-  const totalPrice = selectedSeats.length > 0 ? (selectedSeats[0] ? seats.length * 100 : 0) : 0; // Dummy price logic
-
   return (
-    <div className="border-t border-gray-200 mt-4 pt-4">
+    <div className="border-t md:border-t-0 border-gray-200 mt-4 pt-4 md:mt-0 md:pt-0">
       <h4 className="font-bold text-lg mb-4 text-center">Select Your Seats</h4>
       <div className="flex flex-col md:flex-row gap-8">
         <div className="flex-grow grid grid-cols-5 gap-2 justify-center max-w-xs mx-auto">
@@ -64,7 +61,7 @@ export const SeatLayout: React.FC<SeatLayoutProps> = ({ seats, onBookNow }) => {
           <div className="p-4 bg-orange-50 rounded-lg">
             <h5 className="font-bold mb-2">Booking Summary</h5>
             <p>Selected Seats: <span className="font-semibold">{selectedSeats.map(s => s.number).join(', ') || 'None'}</span></p>
-            <p>Total Price: <span className="font-semibold text-orange-600">{selectedSeats.length * 5000} RWF</span></p>
+            <p>Total Seats: <span className="font-semibold text-orange-600">{selectedSeats.length}</span></p>
           </div>
           <div className="flex items-center space-x-4">
             <div className="flex items-center"><ArmchairIcon className="w-5 h-5 text-gray-600 mr-2" /> Available</div>

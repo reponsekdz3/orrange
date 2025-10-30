@@ -1,13 +1,21 @@
-
 import React from 'react';
 import type { Bus } from '../types';
-import { ClockIcon, StarIcon } from './icons';
+import { ClockIcon, StarIcon, WifiIcon, SnowflakeIcon, ZapIcon } from './icons';
 
 interface BusCardProps {
   bus: Bus;
   isExpanded: boolean;
   onToggleSeats: () => void;
 }
+
+const Amenities: React.FC<{ amenities: Bus['amenities'] }> = ({ amenities }) => (
+    <div className="flex items-center space-x-2 text-gray-500 mt-1">
+        {amenities.wifi && <WifiIcon className="w-4 h-4" title="WiFi available"/>}
+        {amenities.ac && <SnowflakeIcon className="w-4 h-4" title="Air Conditioning"/>}
+        {amenities.power && <ZapIcon className="w-4 h-4" title="Power Outlets"/>}
+    </div>
+);
+
 
 export const BusCard: React.FC<BusCardProps> = ({ bus, isExpanded, onToggleSeats }) => {
   const availableSeats = bus.seats.filter(s => !s.isBooked).length;
@@ -17,9 +25,12 @@ export const BusCard: React.FC<BusCardProps> = ({ bus, isExpanded, onToggleSeats
       <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
         <div className="md:col-span-3">
           <h3 className="font-bold text-lg text-gray-800">{bus.operator}</h3>
-          <div className="flex items-center text-sm text-yellow-500">
-            <StarIcon className="w-4 h-4 mr-1 fill-current" />
-            <span>{bus.rating}</span>
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center text-sm text-yellow-500">
+              <StarIcon className="w-4 h-4 mr-1 fill-current" />
+              <span>{bus.rating}</span>
+            </div>
+            <Amenities amenities={bus.amenities} />
           </div>
         </div>
         

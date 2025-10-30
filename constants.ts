@@ -1,4 +1,3 @@
-
 import type { Bus } from './types';
 
 const generateSeats = (): { id: string, number: string, isBooked: boolean }[] => {
@@ -29,6 +28,10 @@ export const MOCK_BUSES: Bus[] = [
     price: 5000,
     rating: 4.5,
     seats: generateSeats(),
+    amenities: { wifi: true, ac: true, power: true },
+    stops: ['Kigali', 'Muhanga', 'Huye'],
+    status: 'On Route',
+    occupancy: 85,
   },
   {
     id: 'B2',
@@ -41,6 +44,10 @@ export const MOCK_BUSES: Bus[] = [
     price: 5500,
     rating: 4.8,
     seats: generateSeats(),
+    amenities: { wifi: true, ac: true, power: false },
+    stops: ['Kigali', 'Nyanza', 'Huye'],
+    status: 'Parked',
+    occupancy: 60,
   },
   {
     id: 'B3',
@@ -53,6 +60,10 @@ export const MOCK_BUSES: Bus[] = [
     price: 4000,
     rating: 4.2,
     seats: generateSeats(),
+    amenities: { wifi: false, ac: true, power: true },
+    stops: ['Kigali', 'Nyabugogo', 'Musanze'],
+    status: 'On Route',
+    occupancy: 95,
   },
   {
     id: 'B4',
@@ -65,6 +76,10 @@ export const MOCK_BUSES: Bus[] = [
     price: 4200,
     rating: 4.6,
     seats: generateSeats(),
+    amenities: { wifi: true, ac: true, power: true },
+    stops: ['Kigali', 'Gakenke', 'Musanze'],
+    status: 'Maintenance',
+    occupancy: 0,
   },
    {
     id: 'B5',
@@ -77,6 +92,10 @@ export const MOCK_BUSES: Bus[] = [
     price: 5000,
     rating: 4.7,
     seats: generateSeats(),
+    amenities: { wifi: true, ac: false, power: false },
+    stops: ['Huye', 'Nyanza', 'Kigali'],
+    status: 'Parked',
+    occupancy: 70,
   },
   {
     id: 'B6',
@@ -89,6 +108,10 @@ export const MOCK_BUSES: Bus[] = [
     price: 4000,
     rating: 4.3,
     seats: generateSeats(),
+    amenities: { wifi: true, ac: true, power: true },
+    stops: ['Musanze', 'Base', 'Kigali'],
+    status: 'On Route',
+    occupancy: 92,
   },
 ];
 
@@ -116,5 +139,12 @@ export const DASHBOARD_DATA = {
         { name: 'Volcano Express', value: 300 },
         { name: 'Horizon Coaches', value: 250 },
         { name: 'Other', value: 100 },
+    ],
+    occupancyByRoute: [
+        { name: 'Kigali - Huye', occupancy: 88 },
+        { name: 'Kigali - Musanze', occupancy: 95 },
+        { name: 'Huye - Kigali', occupancy: 75 },
+        { name: 'Musanze - Rubavu', occupancy: 65 },
+        { name: 'Kigali - Nyagatare', occupancy: 92 },
     ]
 };
