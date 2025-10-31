@@ -1,80 +1,89 @@
-import React, { useState } from 'react';
+
+import React from 'react';
 import type { Seat } from '../types';
-import { ArmchairIcon } from './icons';
 
 interface SeatLayoutProps {
   seats: Seat[];
-  onBookNow: (selectedSeats: Seat[]) => void;
+  selectedSeats: Seat[];
+  onSeatSelect: (seat: Seat) => void;
 }
 
-export const SeatLayout: React.FC<SeatLayoutProps> = ({ seats, onBookNow }) => {
-  const [selectedSeats, setSelectedSeats] = useState<Seat[]>([]);
-
-  const handleSelectSeat = (seat: Seat) => {
-    if (seat.isBooked) return;
-
-    setSelectedSeats(prev => {
-      const isSelected = prev.some(s => s.id === seat.id);
-      if (isSelected) {
-        return prev.filter(s => s.id !== seat.id);
-      } else {
-        if (prev.length < 5) { // Limit to 5 seats per booking
-            return [...prev, seat];
-        }
-        alert("Ushobora guhitamo imyanya itarenze 5.");
-        return prev;
-      }
-    });
-  };
-
-  const getSeatClass = (seat: Seat) => {
-    if (seat.isBooked) return 'text-gray-300 cursor-not-allowed';
-    if (selectedSeats.some(s => s.id === seat.id)) return 'text-orange-500';
-    return 'text-gray-600 hover:text-orange-400 cursor-pointer';
-  };
+const SeatComponent: React.FC<{ seat: Seat; isSelected: boolean; onSelect: () => void }> = ({ seat, isSelected, onSelect }) => {
+  const baseClasses = "w-8 h-8 md:w-10 md:h-10 rounded-md flex items-center justify-center font-bold text-sm transition-colors duration-200";
+  const bookedClasses = "bg-gray-300 text-gray-500 cursor-not-allowed";
+  const availableClasses = "bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer";
+  const selectedClasses = "bg-orange-500 text-white ring-2 ring-orange-500 ring-offset-2";
+  
+  let seatClass = '';
+  if (seat.isBooked) seatClass = bookedClasses;
+  else if (isSelected) seatClass = selectedClasses;
+  else seatClass = availableClasses;
 
   return (
-    <div className="border-t md:border-t-0 border-gray-200 mt-4 pt-4 md:mt-0 md:pt-0">
-      <h4 className="font-bold text-lg mb-4 text-center">Hitamo Imyanya Yawe</h4>
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="flex-grow grid grid-cols-5 gap-2 justify-center max-w-xs mx-auto">
-          {/* Driver seat placeholder */}
-          <div className="col-span-1"></div>
-          <div className="col-span-4">
-            <svg viewBox="0 0 24 24" className="w-8 h-8 text-gray-700">
-                <path fill="currentColor" d="M18,18.5a1.5,1.5 0 0,1 -1.5,1.5a1.5,1.5 0 0,1 -1.5,-1.5a1.5,1.5 0 0,1 1.5,-1.5a1.5,1.5 0 0,1 1.5,1.5M12.89,3.5l-3.39,3.39c-0.39,0.39 -0.39,1.02 0,1.41l2.5,2.5l-2.89,2.89l-4.11,-4.11c-0.39,-0.39 -1.02,-0.39 -1.41,0l-2.09,2.09c-0.39,0.39 -0.39,1.02 0,1.41l6.29,6.29c0.39,0.39 1.02,0.39 1.41,0l2.09,-2.09c0.39,-0.39 0.39,-1.02 0,-1.41l-4.11,-4.11l2.89,-2.89l2.5,2.5c0.39,0.39 1.02,0.39 1.41,0l3.39,-3.39c0.39,-0.39 0.39,-1.02 0,-1.41l-2.09,-2.09c-0.38,-0.39 -1.02,-0.39 -1.4,0z" />
-            </svg>
+    <div
+      className={`${baseClasses} ${seatClass}`}
+      onClick={() => !seat.isBooked && onSelect()}
+    >
+      {seat.number.slice(0, -1)}<span className="opacity-70">{seat.number.slice(-1)}</span>
+    </div>
+  );
+};
+
+
+export const SeatLayout: React.FC<SeatLayoutProps> = ({ seats, selectedSeats, onSeatSelect }) => {
+  // Assuming a 4-column layout with an aisle (A, C, D)
+  const seatGrid: (Seat | null)[][] = [];
+  const rows = Math.max(...seats.map(s => parseInt(s.number.slice(0, -1))));
+  
+  for (let i = 0; i < rows; i++) {
+    seatGrid.push([null, null, null, null]);
+  }
+
+  seats.forEach(seat => {
+      const row = parseInt(seat.number.slice(0, -1)) - 1;
+      const colChar = seat.number.slice(-1);
+      let col = -1;
+      if (colChar === 'A') col = 0;
+      if (colChar === 'C') col = 2;
+      if (colChar === 'D') col = 3;
+      
+      if(row >= 0 && row < seatGrid.length && col !== -1) {
+        seatGrid[row][col] = seat;
+      }
+  });
+
+  return (
+    <div className="bg-gray-50 p-4 md:p-6 rounded-b-lg">
+      <h4 className="font-bold text-lg mb-4 text-center">Hitamo Umwanya</h4>
+      <div className="flex justify-center items-center space-x-6 mb-4 text-sm">
+        <div className="flex items-center"><div className="w-4 h-4 bg-green-100 border border-green-300 rounded mr-2"></div><span>Uhari</span></div>
+        <div className="flex items-center"><div className="w-4 h-4 bg-orange-500 rounded mr-2"></div><span>Wahisemo</span></div>
+        <div className="flex items-center"><div className="w-4 h-4 bg-gray-300 rounded mr-2"></div><span>Wafashwe</span></div>
+      </div>
+      <div className="flex justify-center">
+        <div className="p-4 bg-white rounded-lg shadow-inner inline-block">
+          <div className="flex justify-between mb-4 px-1">
+              <div className="w-10 h-10 bg-gray-200 rounded flex items-center justify-center font-bold text-xs">Umushoferi</div>
+              <div className="w-10 h-10"></div>
           </div>
-          
-          {seats.map((seat, index) => (
-            <div
-              key={seat.id}
-              onClick={() => handleSelectSeat(seat)}
-              className={`flex flex-col items-center justify-center ${index % 4 === 1 ? 'mr-4' : ''}`}
-            >
-              <ArmchairIcon className={`w-8 h-8 transition-colors ${getSeatClass(seat)}`} />
-              <span className="text-xs">{seat.number}</span>
-            </div>
-          ))}
-        </div>
-        <div className="md:w-1/3 space-y-4">
-          <div className="p-4 bg-orange-50 rounded-lg">
-            <h5 className="font-bold mb-2">Ibyerekeye Itike</h5>
-            <p>Imyanya Wahisemo: <span className="font-semibold">{selectedSeats.map(s => s.number).join(', ') || 'Nta n\'umwe'}</span></p>
-            <p>Imyanya Yose: <span className="font-semibold text-orange-600">{selectedSeats.length}</span></p>
+          <div className="space-y-2">
+            {seatGrid.map((row, rowIndex) => (
+              <div key={rowIndex} className="flex gap-2 md:gap-4 justify-center items-center">
+                {row.map((seat, colIndex) => {
+                  if (colIndex === 1) return <div key={colIndex} className="w-4 md:w-6"></div> // Aisle
+                  if (!seat) return <div key={colIndex} className="w-8 h-8 md:w-10 md:h-10"></div>;
+                  return (
+                    <SeatComponent 
+                      key={seat.id} 
+                      seat={seat} 
+                      isSelected={selectedSeats.some(s => s.id === seat.id)} 
+                      onSelect={() => onSeatSelect(seat)}
+                    />
+                  );
+                })}
+              </div>
+            ))}
           </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center"><ArmchairIcon className="w-5 h-5 text-gray-600 mr-2" /> Uhari</div>
-            <div className="flex items-center"><ArmchairIcon className="w-5 h-5 text-orange-500 mr-2" /> Wahisemo</div>
-            <div className="flex items-center"><ArmchairIcon className="w-5 h-5 text-gray-300 mr-2" /> Wafashwe</div>
-          </div>
-          <button
-            onClick={() => onBookNow(selectedSeats)}
-            disabled={selectedSeats.length === 0}
-            className="w-full bg-orange-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-orange-600 disabled:bg-orange-200 disabled:text-orange-400 disabled:cursor-not-allowed transition-colors"
-          >
-            Komeza Ufate Itike
-          </button>
         </div>
       </div>
     </div>

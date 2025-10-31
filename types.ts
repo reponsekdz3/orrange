@@ -1,5 +1,5 @@
 
-export type Page = 'dashboard' | 'my-bookings' | 'bus-tracking' | 'companies' | 'account';
+export type Page = 'dashboard' | 'my-bookings' | 'companies' | 'account' | 'tracking' | 'company-detail';
 
 export interface Seat {
   id: string;
@@ -29,14 +29,17 @@ export interface Booking {
   id: string;
   bus: Bus;
   seats: Seat[];
-  totalPrice: number;
   bookingDate: string;
-  status: 'Confirmed' | 'Cancelled';
+  status: 'Confirmed' | 'Cancelled' | 'Pending';
   userRating?: number;
 }
 
 export interface Company {
+    id: string;
     name: string;
-    logoUrl: string;
-    busImageUrl: string;
+    logo: string;
+    rating: number;
+    totalBuses: number;
+    description: string;
+    routes: { from: string; to: string }[];
 }
