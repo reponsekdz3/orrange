@@ -1,3 +1,6 @@
+
+export type Page = 'dashboard' | 'my-bookings' | 'bus-tracking' | 'companies' | 'account';
+
 export interface Seat {
   id: string;
   number: string;
@@ -7,44 +10,33 @@ export interface Seat {
 export interface Bus {
   id: string;
   operator: string;
-  from: string;
-  to: string;
-  departureTime: string;
-  arrivalTime: string;
-  duration: string;
-  price: number;
   rating: number;
-  seats: Seat[];
   amenities: {
     wifi: boolean;
     ac: boolean;
     power: boolean;
   };
-  stops: string[];
-  status: 'On Route' | 'Parked' | 'Maintenance';
-  occupancy: number; // as a percentage, e.g., 85 for 85%
+  departureTime: string;
+  arrivalTime: string;
+  duration: string;
+  from: string;
+  to: string;
+  price: number;
+  seats: Seat[];
 }
 
 export interface Booking {
   id: string;
   bus: Bus;
   seats: Seat[];
-  passengerName: string;
-  passengerContact: string;
+  totalPrice: number;
   bookingDate: string;
   status: 'Confirmed' | 'Cancelled';
-  userRating?: number; // 1-5 stars
+  userRating?: number;
 }
 
-export interface SearchParams {
-  from: string;
-  to: string;
-  date: string;
-}
-
-export enum View {
-  SEARCH = 'search',
-  BOOKINGS = 'bookings',
-  COMPANIES = 'companies',
-  ACCOUNT = 'account'
+export interface Company {
+    name: string;
+    logoUrl: string;
+    busImageUrl: string;
 }

@@ -1,7 +1,5 @@
 {
-  "name": "Safiri: Fata Itike mu Rwanda",
-  "description": "A powerful and modern bus booking application with a clean, orange-themed UI. It features a comprehensive search and booking flow, seat selection, booking management, and an advanced dashboard for analytics.",
-  "requestFramePermissions": [
-    "geolocation"
-  ]
+  "name": "Twende",
+  "description": "Porogaramu yo gufata amatike ya bisi mu Rwanda.",
+  "requestFramePermissions": []
 }
