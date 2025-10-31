@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import type { Bus, Seat } from '../types';
 import { XIcon } from './icons';
@@ -21,7 +20,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ bus, selectedSeats, 
     if (passengerName.trim() && passengerContact.trim()) {
       onConfirmBooking(passengerName, passengerContact);
     } else {
-      alert('Please fill in all passenger details.');
+      alert('Uzuza amakuru y\'umugenzi yose.');
     }
   };
 
@@ -29,7 +28,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ bus, selectedSeats, 
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-md transform transition-all">
         <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-          <h3 className="text-xl font-bold text-gray-800">Confirm Your Booking</h3>
+          <h3 className="text-xl font-bold text-gray-800">Emeza Itike Yawe</h3>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
             <XIcon className="w-6 h-6" />
           </button>
@@ -37,17 +36,17 @@ export const BookingModal: React.FC<BookingModalProps> = ({ bus, selectedSeats, 
         
         <div className="p-6 space-y-4">
           <div>
-            <p><span className="font-semibold">{bus.operator}</span>: {bus.from} to {bus.to}</p>
+            <p><span className="font-semibold">{bus.operator}</span>: {bus.from} &rarr; {bus.to}</p>
             <p className="text-sm text-gray-500">{bus.departureTime} - {bus.arrivalTime}</p>
           </div>
           <div className="bg-orange-50 p-3 rounded-md">
-            <p>Seats: <span className="font-bold">{selectedSeats.map(s => s.number).join(', ')}</span></p>
-            <p>Total Price: <span className="font-bold text-orange-600 text-lg">{totalPrice} RWF</span></p>
+            <p>Imyanya: <span className="font-bold">{selectedSeats.map(s => s.number).join(', ')}</span></p>
+            <p>Igiciro Cyose: <span className="font-bold text-orange-600 text-lg">{totalPrice} RWF</span></p>
           </div>
           
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="passengerName" className="block text-sm font-medium text-gray-700">Passenger Name</label>
+              <label htmlFor="passengerName" className="block text-sm font-medium text-gray-700">Izina ry'Umugenzi</label>
               <input 
                 type="text" 
                 id="passengerName" 
@@ -58,7 +57,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ bus, selectedSeats, 
               />
             </div>
             <div>
-              <label htmlFor="passengerContact" className="block text-sm font-medium text-gray-700">Contact Number</label>
+              <label htmlFor="passengerContact" className="block text-sm font-medium text-gray-700">Nimero ya Terefone</label>
               <input 
                 type="tel" 
                 id="passengerContact" 
@@ -73,7 +72,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ bus, selectedSeats, 
                 type="submit"
                 className="w-full bg-orange-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-orange-600 transition-colors"
               >
-                Confirm & Pay
+                Emeza Wishyure
               </button>
             </div>
           </form>

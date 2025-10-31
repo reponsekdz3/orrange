@@ -16,6 +16,30 @@ const generateSeats = (): { id: string, number: string, isBooked: boolean }[] =>
   return seats;
 };
 
+export const TRANSPORT_COMPANIES = [
+  {
+    name: 'Kigali Express',
+    logoUrl: 'https://i.imgur.com/3Yx3m5A.png',
+    busImageUrl: 'https://i.imgur.com/rLsmhJb.jpeg',
+  },
+  {
+    name: 'Volcano Express',
+    logoUrl: 'https://i.imgur.com/u0v2z9e.png',
+    busImageUrl: 'https://i.imgur.com/G4hScvN.jpeg',
+  },
+  {
+    name: 'Horizon Coaches',
+    logoUrl: 'https://i.imgur.com/nL1Y3a8.png',
+    busImageUrl: 'https://i.imgur.com/yS4f2aX.jpeg',
+  },
+  {
+    name: 'Ritco Ltd',
+    logoUrl: 'https://i.imgur.com/b5v9f3d.png',
+    busImageUrl: 'https://i.imgur.com/k2e4B2j.jpeg',
+  },
+];
+
+
 export const MOCK_BUSES: Bus[] = [
   {
     id: 'B1',
@@ -112,6 +136,38 @@ export const MOCK_BUSES: Bus[] = [
     stops: ['Musanze', 'Base', 'Kigali'],
     status: 'On Route',
     occupancy: 92,
+  },
+  {
+    id: 'B7',
+    operator: 'Ritco Ltd',
+    from: 'Kigali',
+    to: 'Huye',
+    departureTime: '10:00 AM',
+    arrivalTime: '12:30 PM',
+    duration: '2h 30m',
+    price: 4800,
+    rating: 4.9,
+    seats: generateSeats(),
+    amenities: { wifi: true, ac: true, power: true },
+    stops: ['Kigali', 'Ruyenzi', 'Muhanga', 'Huye'],
+    status: 'On Route',
+    occupancy: 90,
+  },
+  {
+    id: 'B8',
+    operator: 'Ritco Ltd',
+    from: 'Kigali',
+    to: 'Musanze',
+    departureTime: '01:30 PM',
+    arrivalTime: '03:30 PM',
+    duration: '2h 0m',
+    price: 4100,
+    rating: 4.8,
+    seats: generateSeats(),
+    amenities: { wifi: true, ac: true, power: false },
+    stops: ['Kigali', 'Nyabugogo', 'Gakenke', 'Musanze'],
+    status: 'Parked',
+    occupancy: 55,
   },
 ];
 

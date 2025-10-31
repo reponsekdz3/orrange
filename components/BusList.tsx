@@ -11,7 +11,7 @@ interface BusListProps {
 
 const RouteStops: React.FC<{ stops: string[] }> = ({ stops }) => (
   <div className="md:w-1/4 pr-8 border-r border-gray-200">
-      <h4 className="font-bold text-lg mb-4 text-center">Route Stops</h4>
+      <h4 className="font-bold text-lg mb-4 text-center">Aho Bisi Ihagarara</h4>
       <ul className="relative">
           {stops.map((stop, index) => (
               <li key={index} className="flex items-start pb-6 last:pb-0">
@@ -40,13 +40,14 @@ export const BusList: React.FC<BusListProps> = ({ buses, onBookNow }) => {
   if (buses.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500 text-lg">No buses found for this route. Try another search.</p>
+        <p className="text-gray-500 text-lg">Nta bisi zibonetse kuri uyu murongo. Gerageza bundi bushakashatsi.</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 mt-12">
+      <h2 className="text-3xl font-bold text-gray-800">Ibisubizo by'ishakisha</h2>
       {buses.map(bus => (
         <div key={bus.id}>
           <BusCard

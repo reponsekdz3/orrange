@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import type { Booking } from '../types';
 import { BusIcon } from './icons';
@@ -25,21 +24,21 @@ export const BusTrackingMap: React.FC<BusTrackingMapProps> = ({ booking, onBack 
         return () => clearInterval(interval);
     }, []);
 
-    const estimatedTime = "15 mins";
+    const estimatedTime = "iminota 15";
 
     return (
         <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
             <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold">Live Bus Tracking</h2>
+                <h2 className="text-2xl font-bold">Kurikira Bisi Live</h2>
                 <button onClick={onBack} className="text-orange-600 font-semibold hover:underline">
-                    &larr; Back to Bookings
+                    &larr; Subira ku Matike Yanjye
                 </button>
             </div>
 
             <div className="bg-gray-100 rounded-lg p-4 mb-6">
                 <p className="font-bold">{booking.bus.operator} - {booking.bus.from} to {booking.bus.to}</p>
-                <p className="text-sm text-gray-600">Status: <span className="text-green-600 font-semibold">On Time</span></p>
-                <p className="text-sm text-gray-600">Estimated Arrival: <span className="font-semibold">{booking.bus.arrivalTime}</span> ({estimatedTime} remaining)</p>
+                <p className="text-sm text-gray-600">Uko bihagaze: <span className="text-green-600 font-semibold">Ku Gihe</span></p>
+                <p className="text-sm text-gray-600">Iteganywa ryo Kugera: <span className="font-semibold">{booking.bus.arrivalTime}</span> ({estimatedTime} hasigaye)</p>
             </div>
 
             <div className="relative p-8 overflow-hidden">

@@ -33,6 +33,7 @@ export interface Booking {
   passengerContact: string;
   bookingDate: string;
   status: 'Confirmed' | 'Cancelled';
+  userRating?: number; // 1-5 stars
 }
 
 export interface SearchParams {
@@ -44,5 +45,6 @@ export interface SearchParams {
 export enum View {
   SEARCH = 'search',
   BOOKINGS = 'bookings',
-  DASHBOARD = 'dashboard'
+  COMPANIES = 'companies',
+  ACCOUNT = 'account'
 }

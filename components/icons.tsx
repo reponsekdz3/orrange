@@ -49,6 +49,13 @@ export const StarIcon: React.FC<IconProps> = ({ className }) => (
     </svg>
 );
 
+export const StarFullIcon: React.FC<IconProps> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+);
+
+
 export const ArmchairIcon: React.FC<IconProps> = ({ className }) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
         <path d="M19 10V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"/><path d="M3 12h18"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/><path d="M7 12v-2"/><path d="M17 12v-2"/>
@@ -89,4 +96,22 @@ export const UsersIcon: React.FC<IconProps> = ({ className }) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
     </svg>
+);
+
+export const UserIcon: React.FC<IconProps> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+    </svg>
+);
+
+export const PrinterIcon: React.FC<IconProps> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M6 9V2h12v7" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><path d="M6 14h12v8H6z" />
+    </svg>
+);
+
+export const QrCodeIcon: React.FC<IconProps> = ({ className }) => (
+  <svg className={className} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M10 10h20v20h-20zm15 5v10h-10v-10zm-5 15h10v10h-10zm-5 5h10v10h-10zM70 10h20v20h-20zm5 5h10v10h-10zM10 70h20v20h-20zm5 5h10v10h-10z M55 10h5v5h-5zm-30 5h5v5h-5zm5 5h5v5h-5zm-15 20h5v5h-5zm5 0h5v5h-5zm-5 5h5v5h-5zm0 5h5v5h-5zm0 5h5v5h-5z M45 35h5v5h-5zm-5 5h5v5h-5zM45 45h5v5h-5zm5 0h5v5h-5zm5 5h5v5h-5z M45 60h5v5h-5zm-5 5h5v5h-5zm-5 5h5v5h-5zm-5-5h5v5h-5zm0 10h5v5h-5zm20-5h5v5h-5z M50 65h5v5h-5zm10-5h5v5h-5zm5-5h5v5h-5zm5-5h5v5h-5zm-5-5h5v5h-5z M70 35h5v5h-5zm5 0h5v5h-5zm5 0h5v5h-5zm-15 5h5v5h-5zm-10 15h5v5h-5z M65 80h5v5h-5zm-5 0h5v5h-5zm-5 0h5v5h-5zm-10 0h5v5h-5zm-5 0h5v5h-5zm35-15h5v5h-5z M90 90h-5v-5h5zm-5-10h-5v-5h5zm-5 0h-5v-5h5z"/>
+  </svg>
 );

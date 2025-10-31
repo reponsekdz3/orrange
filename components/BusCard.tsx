@@ -52,7 +52,7 @@ export const BusCard: React.FC<BusCardProps> = ({ bus, isExpanded, onToggleSeats
         
         <div className="md:col-span-2 text-center">
           <p className="font-bold text-xl text-orange-600">{bus.price} RWF</p>
-          <p className="text-sm text-gray-500">per seat</p>
+          <p className="text-sm text-gray-500">ku mwanya</p>
         </div>
 
         <div className="md:col-span-2 text-center md:text-right">
@@ -60,9 +60,9 @@ export const BusCard: React.FC<BusCardProps> = ({ bus, isExpanded, onToggleSeats
             onClick={onToggleSeats}
             className="w-full md:w-auto bg-orange-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-orange-600 transition-colors duration-300"
           >
-            {isExpanded ? 'Hide Seats' : 'View Seats'}
+            {isExpanded ? 'Hisha Imyanya' : 'Reba Imyanya'}
           </button>
-          <p className="text-sm text-green-600 mt-2">{availableSeats} seats available</p>
+          <p className="text-sm text-green-600 mt-2">{availableSeats} imyanya irahari</p>
         </div>
       </div>
     </div>

@@ -21,21 +21,21 @@ export const SeatLayout: React.FC<SeatLayoutProps> = ({ seats, onBookNow }) => {
         if (prev.length < 5) { // Limit to 5 seats per booking
             return [...prev, seat];
         }
-        alert("You can select a maximum of 5 seats.");
+        alert("Ushobora guhitamo imyanya itarenze 5.");
         return prev;
       }
     });
   };
 
   const getSeatClass = (seat: Seat) => {
-    if (seat.isBooked) return 'text-gray-400 cursor-not-allowed';
+    if (seat.isBooked) return 'text-gray-300 cursor-not-allowed';
     if (selectedSeats.some(s => s.id === seat.id)) return 'text-orange-500';
     return 'text-gray-600 hover:text-orange-400 cursor-pointer';
   };
 
   return (
     <div className="border-t md:border-t-0 border-gray-200 mt-4 pt-4 md:mt-0 md:pt-0">
-      <h4 className="font-bold text-lg mb-4 text-center">Select Your Seats</h4>
+      <h4 className="font-bold text-lg mb-4 text-center">Hitamo Imyanya Yawe</h4>
       <div className="flex flex-col md:flex-row gap-8">
         <div className="flex-grow grid grid-cols-5 gap-2 justify-center max-w-xs mx-auto">
           {/* Driver seat placeholder */}
@@ -59,21 +59,21 @@ export const SeatLayout: React.FC<SeatLayoutProps> = ({ seats, onBookNow }) => {
         </div>
         <div className="md:w-1/3 space-y-4">
           <div className="p-4 bg-orange-50 rounded-lg">
-            <h5 className="font-bold mb-2">Booking Summary</h5>
-            <p>Selected Seats: <span className="font-semibold">{selectedSeats.map(s => s.number).join(', ') || 'None'}</span></p>
-            <p>Total Seats: <span className="font-semibold text-orange-600">{selectedSeats.length}</span></p>
+            <h5 className="font-bold mb-2">Ibyerekeye Itike</h5>
+            <p>Imyanya Wahisemo: <span className="font-semibold">{selectedSeats.map(s => s.number).join(', ') || 'Nta n\'umwe'}</span></p>
+            <p>Imyanya Yose: <span className="font-semibold text-orange-600">{selectedSeats.length}</span></p>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="flex items-center"><ArmchairIcon className="w-5 h-5 text-gray-600 mr-2" /> Available</div>
-            <div className="flex items-center"><ArmchairIcon className="w-5 h-5 text-orange-500 mr-2" /> Selected</div>
-            <div className="flex items-center"><ArmchairIcon className="w-5 h-5 text-gray-400 mr-2" /> Booked</div>
+            <div className="flex items-center"><ArmchairIcon className="w-5 h-5 text-gray-600 mr-2" /> Uhari</div>
+            <div className="flex items-center"><ArmchairIcon className="w-5 h-5 text-orange-500 mr-2" /> Wahisemo</div>
+            <div className="flex items-center"><ArmchairIcon className="w-5 h-5 text-gray-300 mr-2" /> Wafashwe</div>
           </div>
           <button
             onClick={() => onBookNow(selectedSeats)}
             disabled={selectedSeats.length === 0}
-            className="w-full bg-orange-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-orange-600 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+            className="w-full bg-orange-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-orange-600 disabled:bg-orange-200 disabled:text-orange-400 disabled:cursor-not-allowed transition-colors"
           >
-            Proceed to Book
+            Komeza Ufate Itike
           </button>
         </div>
       </div>
